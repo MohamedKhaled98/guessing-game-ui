@@ -47,21 +47,22 @@ const LineChartWidget = () => {
       duration: 0,
       strokeDashoffset: pathRef.current!.getTotalLength(),
       strokeDasharray: pathRef.current!.getTotalLength(),
-      ease: "power1.inOut",
+      ease: "none",
     });
   };
   const animatePath = () => {
     const path = pathRef.current;
     if (!path) return;
 
+    const newDrawnPercentage = (counter / 10) * 100;
     const length = path.getTotalLength();
-    const newDrawnPercentage = Math.min(drawnPercentage + 0.6, 100);
     const newOffset = length - (length * newDrawnPercentage) / 100;
 
     gsap.to(path, {
       duration: 0,
       strokeDashoffset: newOffset,
-      ease: "power1.inOut",
+      strokeDasharray: length - newDrawnPercentage,
+      ease: "none",
     });
 
     setDrawnPercentage(newDrawnPercentage);
@@ -87,12 +88,12 @@ const LineChartWidget = () => {
             preserveAspectRatio="xMinYMax meet">
             <path
               ref={pathRef}
-              d="M 0,295  Q 500,300,590,0"
+              d="M 0,295  Q 500,300,595,0"
               fill="none"
               stroke="#FB6C4F"
               strokeWidth="4"
-              strokeDasharray="1000"
-              strokeDashoffset="1000"
+              strokeDasharray="750"
+              strokeDashoffset="750"
             />
           </svg>
         </div>
