@@ -10,9 +10,10 @@ type Column = {
 type Props = {
   columns: Column[];
   rowsData: { [key: string]: any }[];
+  getRowClassName?: (row: { [key: string]: any }) => string;
 };
 
-const Table = ({ columns, rowsData }: Props) => {
+const Table = ({ columns, rowsData, getRowClassName }: Props) => {
   return (
     <div className="border overflow-hidden rounded-lg border-slate-800">
       <table className="table-auto border-none w-full rounded-lg border border-slate-700 rounded-md">
@@ -28,7 +29,10 @@ const Table = ({ columns, rowsData }: Props) => {
             <tr key={uuid()}>
               {columns.map((column, index) => (
                 <td
-                  className={classNames(index > 0 && "text-center")}
+                  className={classNames(
+                    index > 0 && "text-center font-semibold",
+                    getRowClassName?.(row)
+                  )}
                   key={column.key}>
                   {row[column.key] ?? "-"}
                 </td>

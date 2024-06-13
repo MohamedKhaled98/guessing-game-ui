@@ -48,7 +48,7 @@ const Chat = ({ currentPlayer }: Props) => {
               <span className="text-pink font-semibold text-sm">
                 {message.name}:
               </span>
-              <span className="px-2 bg-gray-700 text-slate-300 rounded-md text-sm ">
+              <span className="px-2 py-1 bg-gray-700 text-slate-300 rounded-md text-xs ">
                 {message.message}
               </span>
             </li>

@@ -123,6 +123,7 @@ export default function Home() {
                   { key: "prediction", label: "Multiplier" },
                 ]}
                 rowsData={players}
+                getRowClassName={getCurrentRoundRowClasses()}
               />
             </div>
             <SpeedRange setSpeed={setSpeed} speed={speed} />
@@ -143,6 +144,9 @@ export default function Home() {
               { key: "points", label: "Score" },
             ]}
             rowsData={getPlayerRankings()}
+            getRowClassName={(row) =>
+              socket.id && row.id === socket.id ? "bg-slate-700" : ""
+            }
           />
         </div>
         <div className="col-span-6">
@@ -156,4 +160,16 @@ export default function Home() {
       </p>
     </main>
   );
+
+  function getCurrentRoundRowClasses():
+    | ((row: { [key: string]: any }) => string)
+    | undefined {
+    return (row) => {
+      const classes: string[] = [];
+      if (row.id === socket.id) classes.push("bg-slate-700");
+      if (!roundStarted && row.bet != null)
+        classes.push(row.bet > 0 ? "text-green-600" : "text-red-400");
+      return classes.join(" ");
+    };
+  }
 }
