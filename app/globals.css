@@ -2,32 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: white;
+  background: #151a22;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+@layer base {
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"] {
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield !important;
+  }
+
+  thead tr th {
+    padding: 5px 10px;
+    font-weight: 600;
+    color: lightgray;
+    font-size: 12px;
+  }
+  thead tr th:not(:first-child) {
+    text-align: center;
+  }
+  tbody tr:nth-child(odd) {
+    background-color: #262d39;
+  }
+  tbody tr:nth-child(even) {
+    background-color: #1b222c;
+  }
+
+  tbody tr td {
+    padding: 6px 10px;
+    font-weight: 600;
+    color: lightgray;
+    font-size: 13px;
+  }
+
+  /*********** Baseline, reset styles ***********/
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: green;
+    cursor: pointer;
+  }
+
+  /* Removes default focus */
+  input[type="range"]:focus {
+    outline: none;
+  }
+
+  /******** Chrome, Safari, Opera and Edge Chromium styles ********/
+  /* slider track */
+  input[type="range"]::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, #e64188, #fb6c4f);
+    border-radius: 0.5rem;
+    height: 0.25rem;
+  }
+
+  /* slider thumb */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    margin-top: -6px; /* Centers thumb on the track */
+    background: linear-gradient(to right, #e64188, #fb6c4f);
+    border: 1px solid white;
+    border-radius: 0.4rem;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  input[type="range"]:focus::-webkit-slider-thumb {
+    outline: 1px solid #febe2868;
+    outline-offset: 0rem;
   }
 }
